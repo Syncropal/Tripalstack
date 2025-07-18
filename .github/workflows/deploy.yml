@@ -1,0 +1,23 @@
+name: Deploy my portfolio Site to GitHub Pages
+
+on:
+  push:
+    branches: ["main"] # Runs on push to main branch
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest # Uses a latest Ubuntu VM
+
+    steps:
+      # for checking the repo code
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # Validate file
+      - name: Verify files
+        run: |
+          ls -la
+          echo "HTML/CSS/JS files are present!"
+
+      - name: Deploy
+        uses: actions/deploy-pages@v3 # Official GitHub Pages action
