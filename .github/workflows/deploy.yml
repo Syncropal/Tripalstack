@@ -1,23 +1,38 @@
-name: Deploy my portfolio Site to GitHub Pages
+name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: ["main"] # Runs on push to main branch
+    branches: ["main"]
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
 
 jobs:
-  deploy:
-    runs-on: ubuntu-latest # Uses a latest Ubuntu VM
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
 
     steps:
-      # for checking the repo code
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # Validate file
       - name: Verify files
         run: |
           ls -la
-          echo "HTML/CSS/JS files are present!"
+          echo "Static files verified!"
 
-      - name: Deploy
-        uses: actions/deploy-pages@v3 # Official GitHub Pages action
+      - name: Setup Pages
+        uses: actions/configure-pages@v3
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v2
+        with:
+          path: "." # Change to 'dist/' if using a build folder
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v2
