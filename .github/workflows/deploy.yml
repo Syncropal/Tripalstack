@@ -1,4 +1,4 @@
-name: Deploy Static Site (Case-Sensitive Support)
+name: Deploy Static Site
 
 on:
   push:
@@ -17,27 +17,25 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+      # 1. Checkout code
+      - uses: actions/checkout@v4
 
-      # Add Jekyll config to recognize Index.html (capital I)
-      - name: Create case-sensitive config
+      # 2. Handle case sensitivity for Index.html
+      - name: Configure Jekyll (if needed)
         run: |
-          echo "include: [Index.html]" > _config.yml
-          echo "Created _config.yml for case sensitivity"
+          if [ -f "Index.html" ]; then
+            echo "include: [Index.html]" > _config.yml
+            echo "Case sensitivity configured"
+          fi
 
-      # Verify files (debugging)
-      - name: List files
-        run: ls -la
+      # 3. Set up GitHub Pages
+      - uses: actions/configure-pages@v3
 
-      - name: Setup Pages
-        uses: actions/configure-pages@v3
-
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v2
+      # 4. Upload files (correct modern action)
+      - uses: actions/upload-pages-artifact@v2
         with:
-          path: "." # Includes all files (both Index.html and _config.yml)
+          path: "."
 
-      - name: Deploy to GitHub Pages
+      # 5. Deploy
+      - uses: actions/deploy-pages@v2
         id: deployment
-        uses: actions/deploy-pages@v2
