@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Thank You!</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        :root {
+            --cappuccino-cream: #F5E9DC;
+            --coffee-brown: #6F4E37;
+            --espresso-dark: #4B3621;
+            --foam-light: #FFF8F0;
+            --milk: #E6D5C3;
+        }
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--cappuccino-cream);
+            text-align: center;
+            padding: 20px;
+            background-image: url('https://img.icons8.com/ios/50/6F4E37/coffee-beans--v1.png');
+            background-repeat: repeat;
+            background-size: 40px;
+            background-blend-mode: overlay;
+        }
+        .thankyou-container {
+            background: var(--foam-light);
+            max-width: 500px;
+            margin: 80px auto;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(111, 78, 55, 0.1);
+            border: 1px solid var(--milk);
+        }
+        h1 {
+            color: var(--espresso-dark);
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+        .coffee-icon {
+            font-size: 80px;
+            color: var(--coffee-brown);
+            margin: 20px 0;
+            animation: float 3s ease-in-out infinite;
+        }
+        p {
+            color: var(--espresso-dark);
+            font-size: 1.1em;
+            line-height: 1.6;
+            margin: 15px 0;
+        }
+        .redirect {
+            margin-top: 30px;
+            color: var(--coffee-brown);
+        }
+        a {
+            color: var(--espresso-dark);
+            text-decoration: none;
+            font-weight: 600;
+            border-bottom: 2px dotted var(--coffee-brown);
+        }
+        #countdown {
+            font-weight: 600;
+            color: var(--espresso-dark);
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="thankyou-container">
+        <div class="coffee-icon">☕</div>
+        <h1>Thank You!</h1>
+        <p>Your message has been received like a perfect espresso shot.</p>
+        <p>We'll brew a response and get back to you soon!</p>
+        
+        <div class="redirect">
+            <p>Steaming back to homepage in <span id="countdown">5</span> seconds...</p>
+            <p><a href="https://Tripalstack.github.io">Click here</a> if you're not redirected</p>
+        </div>
+    </div>
+
+    <script>
+        // Countdown with coffee-themed console messages
+        let seconds = 5;
+        const messages = [
+            "Brewing your redirect...",
+            "Adding a dash of cinnamon...",
+            "Steaming the milk...",
+            "Pouring the perfect crema...",
+            "Enjoy your digital cappuccino!"
+        ];
+        
+        const countdown = setInterval(() => {
+            document.getElementById('countdown').textContent = --seconds;
+            console.log(messages[seconds]);
+            
+            if (seconds <= 0) {
+                clearInterval(countdown);
+                window.location.href = "https://Tripalstack.github.io";
+            }
+        }, 1000);
+    </script>
+</body>
+</html>
