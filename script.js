@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
-            // Mobile Menu Toggle
+            // Mobile interface menu toggle
             const menuToggle = document.querySelector('.menu-toggle');
             const nav = document.querySelector('nav');
             
